@@ -20,7 +20,6 @@ function App() {
           <div className={styles.content}>
             <Header />
             {selecetedTab === "Home" ? <PostList /> : <CreatePost />}
-            {PostList.length === 0 && <WelcomeMessage />}
             <Footer />
           </div>
         </div>
