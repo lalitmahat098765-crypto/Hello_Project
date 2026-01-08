@@ -6,6 +6,7 @@ import styles from "./App.module.css";
 import PostList from "./components/PostList";
 import { useState } from "react";
 import PostListProvider from "./store/post-list-store";
+import WelcomeMessage from "./components/WelcomeMessage";
 function App() {
   const [selecetedTab, setSelectedTab] = useState("Home");
   return (
@@ -19,6 +20,7 @@ function App() {
           <div className={styles.content}>
             <Header />
             {selecetedTab === "Home" ? <PostList /> : <CreatePost />}
+            {PostList.length === 0 && <WelcomeMessage />}
             <Footer />
           </div>
         </div>
