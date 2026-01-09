@@ -6,7 +6,6 @@ import styles from "./App.module.css";
 import PostList from "./components/PostList";
 import { useState } from "react";
 import PostListProvider from "./store/post-list-store";
-import WelcomeMessage from "./components/WelcomeMessage";
 function App() {
   const [selecetedTab, setSelectedTab] = useState("Home");
   return (
