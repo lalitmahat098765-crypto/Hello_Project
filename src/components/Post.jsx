@@ -29,7 +29,8 @@ function Post({ post }) {
         style={{ margin: "0px 10px 10px 10px" }}
         role="alert"
       >
-        This post is reacted by {post.reactions} people.
+        This post is Like by {post.reactions.likes} and Dislike by{" "}
+        {post.reactions.dislikes} people.
       </div>
     </div>
   );

@@ -16,15 +16,31 @@ function CreatePost() {
     const user_Id = useridElement.current.value;
     const post_Title = post_TitleElement.current.value;
     const post_Content = post_contentElement.current.value;
-    const reactions = reactionsElement.current.value;
+    const [likes, dislikes] = reactionsElement.current.value.split(" ");
     const tags = tagsElement.current.value.split(" ");
+
     useridElement.current.value = "";
     post_TitleElement.current.value = "";
     post_contentElement.current.value = "";
     reactionsElement.current.value = "";
     tagsElement.current.value = "";
 
-    addPost(user_Id, post_Title, post_Content, reactions, tags);
+    fetch("https://dummyjson.com/posts/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: post_Title,
+        body: post_Content,
+        reactions: {
+          likes,
+          dislikes,
+        },
+        userId: user_Id,
+        tags: tags,
+      }),
+    })
+      .then((res) => res.json())
+      .then((post) => addPost(post));
   };
   return (
     <>
@@ -53,7 +69,7 @@ function CreatePost() {
             ref={post_TitleElement}
             className="form-control"
             id="title"
-            placeholder="How are you feeling today?"
+            placeholder="Enter your post title"
           />
         </div>
 
@@ -67,11 +83,11 @@ function CreatePost() {
             ref={post_contentElement}
             className="form-control"
             id="post-content"
-            placeholder="How you are feeling?"
+            placeholder="Enter your post"
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="title" className="form-label">
+          <label htmlFor="reactions" className="form-label">
             No of Reactions
           </label>
 
@@ -80,7 +96,7 @@ function CreatePost() {
             ref={reactionsElement}
             className="form-control"
             id="reactions"
-            placeholder="How many people reacted to this post?"
+            placeholder="Please enter likes and dislike post using space"
           />
         </div>
         <div className="mb-3">
